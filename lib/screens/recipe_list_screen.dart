@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/recipe.dart';
 import '../services/recipe_service.dart';
 import '../widgets/recipe_card.dart';
+import '../widgets/recipe_skeleton.dart';
 import '../widgets/error_widget.dart';
 import 'recipe_detail_screen.dart';
 
@@ -51,6 +52,13 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
         title: const Text('Recipe Explorer'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 2,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () => Navigator.pushNamed(context, '/favorites'),
+            tooltip: 'My Favorites',
+          ),
+        ],
       ),
       body: _buildBody(),
     );
@@ -58,16 +66,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
 
   Widget _buildBody() {
     if (_isLoading) {
-      return const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 16),
-            Text('Loading delicious recipes...'),
-          ],
-        ),
-      );
+      return const RecipeListSkeleton(itemCount: 8);
     }
 
     if (_errorMessage != null) {
@@ -115,11 +114,10 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
   }
 
   void _navigateToRecipeDetail(Recipe recipe) {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-        builder: (context) => RecipeDetailScreen(recipeId: recipe.id),
-      ),
+      '/recipe-detail',
+      arguments: recipe.id,
     );
   }
 } 

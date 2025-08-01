@@ -3,6 +3,7 @@ import '../models/recipe.dart';
 import '../services/recipe_service.dart';
 import '../widgets/error_widget.dart';
 import '../widgets/favorite_button.dart';
+import '../widgets/recipe_detail_skeleton.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final String recipeId;
@@ -66,16 +67,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   Widget _buildBody() {
     if (_isLoading) {
-      return const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 16),
-            Text('Loading recipe details...'),
-          ],
-        ),
-      );
+      return const RecipeDetailSkeleton();
     }
 
     if (_errorMessage != null) {
