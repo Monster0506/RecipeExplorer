@@ -16,11 +16,11 @@ class RecipeSkeleton extends StatelessWidget {
           // Image skeleton
           Expanded(
             flex: 3,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-              ),
+                          child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                ),
               child: const Center(
                 child: SizedBox(
                   width: 40,
@@ -42,24 +42,24 @@ class RecipeSkeleton extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Title skeleton
-                  Container(
-                    height: 16,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
+                                     Container(
+                     height: 16,
+                     width: double.infinity,
+                     decoration: BoxDecoration(
+                       color: Theme.of(context).colorScheme.surfaceVariant,
+                       borderRadius: BorderRadius.circular(4),
+                     ),
+                   ),
                   const SizedBox(height: 8),
                   // Category skeleton
-                  Container(
-                    height: 12,
-                    width: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
+                                     Container(
+                     height: 12,
+                     width: 80,
+                     decoration: BoxDecoration(
+                       color: Theme.of(context).colorScheme.surfaceVariant,
+                       borderRadius: BorderRadius.circular(4),
+                     ),
+                   ),
                 ],
               ),
             ),

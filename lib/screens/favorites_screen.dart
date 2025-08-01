@@ -6,6 +6,7 @@ import '../services/recipe_service.dart';
 import '../widgets/recipe_card.dart';
 import '../widgets/recipe_skeleton.dart';
 import '../widgets/error_widget.dart';
+import '../widgets/theme_toggle_button.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -75,6 +76,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         title: const Text('My Favorites'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 2,
+        actions: [
+          const ThemeToggleButton(),
+        ],
       ),
       body: _buildBody(),
     );

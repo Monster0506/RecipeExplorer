@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/favorites_provider.dart';
+import 'providers/theme_provider.dart';
 import 'screens/recipe_list_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/recipe_detail_screen.dart';
@@ -14,36 +15,27 @@ class RecipeExplorerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FavoritesProvider()..loadFavorites(),
-      child: MaterialApp(
-        title: 'Recipe Explorer',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.orange,
-            brightness: Brightness.light,
-          ),
-          useMaterial3: true,
-          appBarTheme: const AppBarTheme(
-            centerTitle: true,
-            elevation: 2,
-          ),
-          cardTheme: CardTheme(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const RecipeListScreen(),
-          '/favorites': (context) => const FavoritesScreen(),
-          '/recipe-detail': (context) => RecipeDetailScreen(
-                recipeId: ModalRoute.of(context)!.settings.arguments as String,
-              ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => FavoritesProvider()..loadFavorites()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'Recipe Explorer',
+            theme: themeProvider.currentTheme,
+            initialRoute: '/',
+            routes: {
+              '/': (context) => const RecipeListScreen(),
+              '/favorites': (context) => const FavoritesScreen(),
+              '/recipe-detail': (context) => RecipeDetailScreen(
+                    recipeId: ModalRoute.of(context)!.settings.arguments as String,
+                  ),
+            },
+            debugShowCheckedModeBanner: false,
+          );
         },
-        debugShowCheckedModeBanner: false,
       ),
     );
   }

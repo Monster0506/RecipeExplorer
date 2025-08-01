@@ -4,6 +4,7 @@ import '../services/recipe_service.dart';
 import '../widgets/recipe_card.dart';
 import '../widgets/recipe_skeleton.dart';
 import '../widgets/error_widget.dart';
+import '../widgets/theme_toggle_button.dart';
 import 'recipe_detail_screen.dart';
 
 class RecipeListScreen extends StatefulWidget {
@@ -53,6 +54,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 2,
         actions: [
+          const ThemeToggleButton(),
           IconButton(
             icon: const Icon(Icons.favorite),
             onPressed: () => Navigator.pushNamed(context, '/favorites'),
